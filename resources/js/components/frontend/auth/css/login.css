@@ -1,0 +1,51 @@
+h1 {
+    font-size: 48px;
+}
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    height: 600px;
+    flex-flow: column;
+    border-radius: 25px;
+    background: #eeeeee;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+form button {
+    color: black;
+    background: #eeeeee;
+}
+.login-info {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+.login-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    gap: 1rem;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+@media (orientation: portrait) {
+    form {
+        position: relative;
+        width: 320px;
+        height: 500px;
+    }
+    .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+    }
+}
