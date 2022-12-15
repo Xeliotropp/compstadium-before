@@ -34,7 +34,7 @@ function Register() {
         }
 
         axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.post(`/api/register`, data).then(res => { 
+            axios.post(`/register`, data).then(res => { 
                 if(res.data.status === 200)
                 {
                     localStorage.setItem('auth_token', res.data.token);
@@ -67,7 +67,7 @@ function Register() {
                         <span>{registerInput.error_list.email}</span>
                     </div>
                     <div className="form-group mb-3">
-                        <input placeholder="Password" type="text" name="password" onChange={handleInput} value={registerInput.password} className="form-control"  />
+                        <input placeholder="Password" type="password" name="password" onChange={handleInput} value={registerInput.password} className="form-control"  />
                         <span>{registerInput.error_list.password}</span>
                     </div>
                     <div className="form-group mb-3">
