@@ -12,7 +12,7 @@ import "./bootstrap";
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import "./components/App.jsx";
+import App from "./components/App.jsx";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
