@@ -18,7 +18,7 @@ class AuthContoller extends Controller
 
         ]);
         if($validator->fails()){
-            return response()->(['validation_errors'=>messages()]);
+            return response()->json(['validation_errors'=>messages()]);
         }
         else{
             $user = User::create([
@@ -32,7 +32,7 @@ class AuthContoller extends Controller
                 'username'=>$user->name,
                 'token'=>$token,
                 'message'=>'Registration Successful',
-            ])
+            ]);
         }
     }
 }
