@@ -108,11 +108,12 @@ header .responsive_nav {
 }
 footer {
     position: relative;
-    bottom: 0;
-    padding: 1%;
-    height: 17%;
-    display: grid;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    bottom: 0;
+    padding: 2%;
+    height: 17%;
     width: 100%;
     background-color: var(--footerMainColor);
     color: var(--footerTextColor);
@@ -150,10 +151,8 @@ a:visited {
     cursor: pointer;
 }
 .title {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+    display: flex;
     align-items: center;
-    justify-items: space-between;
     position: relative;
     text-align: center;
     font-size: 1rem;
