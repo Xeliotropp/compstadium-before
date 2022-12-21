@@ -80,40 +80,16 @@ header nav {
     transition: 0.6s;
     transform: translateX(-100vh);
 }
-@media (orientation: portrait) {
-    header nav {
-        width: 36%;
-    }
-    footer {
-        position: relative;
-        display: flex;
-        flex-flow: column;
-        bottom: 0;
-        height: 450px;
-        justify-content: center;
-        gap: 2rem;
-    }
-    .title {
-        display: flex;
-        flex-flow: column;
-        gap: 3rem;
-        align-items: center;
-        position: relative;
-        font-size: 1rem;
-    }
-}
-
 header .responsive_nav {
     transform: none;
 }
 footer {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     bottom: 0;
-    padding: 2%;
+    padding: 1%;
     height: 17%;
+    display: grid;
+    align-items: center;
     width: 100%;
     background-color: var(--footerMainColor);
     color: var(--footerTextColor);
@@ -151,10 +127,35 @@ a:visited {
     cursor: pointer;
 }
 .title {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     align-items: center;
+    justify-items: space-between;
     position: relative;
     text-align: center;
     font-size: 1rem;
     margin-left: 0.5rem;
+}
+
+@media (orientation: portrait) {
+    header nav {
+        width: 36%;
+    }
+    footer {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        bottom: 0;
+        height: 460px;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .title {
+        display: flex;
+        flex-flow: column;
+        gap: 3rem;
+        align-items: center;
+        position: relative;
+        font-size: 1rem;
+    }
 }

@@ -5,8 +5,8 @@ import Home from "../components/frontend/Home";
 import Login from "../components/frontend/auth/Login";
 import Register from "../components/frontend/auth/Register";
 import About from "../components/frontend/About";
+import AboutMe from "../components/frontend/auth/AboutMe";
 import NotFound from "../components/frontend/NotFound";
-import IndexProduct from "../components/frontend/products/Index";
 import NewProduct from "../components/frontend/products/New";
 
 function Router(){
@@ -17,6 +17,7 @@ function Router(){
             <Route path="/login" element = {<Login/>}/>
             <Route path="/register" element = {<Register/>}/>
             <Route path="/about" element = {<About/>}/>
+            <Route path="/profile" element = {<AboutMe/>}/>
             <Route path="/product/new" element= {<NewProduct/>}/>
         </Routes>
     )
