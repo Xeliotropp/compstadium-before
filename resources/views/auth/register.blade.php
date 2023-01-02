@@ -1,3 +1,6 @@
 @extends('layouts.app')
-@viteReactRefresh
-@vite(['resources/css/app.css', 'resources/js/app.jsx'])
+
+@section('content')
+    @viteReactRefresh
+    @vite(['resources/js/components/frontend/auth/css/login.css', 'resources/js/components/frontend/auth/Register.jsx'])
+@endsection

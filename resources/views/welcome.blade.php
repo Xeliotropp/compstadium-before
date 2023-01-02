@@ -6,10 +6,9 @@
 
         <title>compstadium</title>
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+        @vite(['resources/css/app.css', 'resources/js/index.jsx'])
     </head>
     <body class="antialiased">
-        <div id="app">
-        </div>
+        <div id="app"></div>
     </body>
 </html>

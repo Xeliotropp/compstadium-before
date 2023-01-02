@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from 'react-dom/client';
 import Router from "../router/Router";
 import '../../css/app.css'
 import axios from "axios";
@@ -17,3 +18,13 @@ function App(){
 }
 
 export default App
+
+if (document.getElementById('example')) {
+    const Index = ReactDOM.createRoot(document.getElementById("example"));
+
+    Index.render(
+        <React.StrictMode>
+            <Example/>
+        </React.StrictMode>
+    )
+}

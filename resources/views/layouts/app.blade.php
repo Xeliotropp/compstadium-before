@@ -7,13 +7,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('compstadium') }}</title>
-       <!-- Scripts -->
+    <title>{{ config('compstadium', 'compstadium') }}</title>
+
+    <!-- Scripts -->
     @viteReactRefresh
-    @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+    @vite(['resources/css/app.css', 'resources/js/index.jsx'])
 </head>
 <body>
     <div id="app">
+
         <main class="py-4">
             @yield('content')
         </main>
