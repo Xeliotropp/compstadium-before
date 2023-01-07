@@ -19,7 +19,7 @@
     --bodyTextColor: #dfe0e2;
 }
 header {
-    padding: 2%;
+    padding: 3%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,7 +66,7 @@ button {
 }
 
 header nav {
-    position: fixed;
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,9 +83,15 @@ header nav {
 header .responsive_nav {
     transform: none;
 }
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bodyMainColor);
+}
 footer {
     position: relative;
-    bottom: 0;
+    margin-top: auto;
     padding: 1%;
     height: 17%;
     display: grid;
@@ -137,6 +143,52 @@ a:visited {
     margin-left: 0.5rem;
 }
 
+.user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    height: 600px;
+    flex-flow: column;
+    border-radius: 25px;
+    background: #eeeeee;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+#loginButton,
+#registerButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu-bar {
+    background-color: var(--navbarMainColor);
+    width: 75%;
+    height: 80px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4.5rem;
+    border-radius: 15px;
+    top: 100px;
+}
+.menu-bar button:hover {
+    font-size: 24px;
+    transition: 0.3s;
+    transform: translateY(0px);
+    transition: 0.3s;
+}
+@media (max-height: 480px) {
+    .menu-bar {
+        display: none;
+    }
+}
 @media (orientation: portrait) {
     header nav {
         width: 36%;
@@ -157,5 +209,12 @@ a:visited {
         align-items: center;
         position: relative;
         font-size: 1rem;
+    }
+    .menu-bar {
+        display: none;
+        height: 0;
+    }
+    .center {
+        display: none;
     }
 }

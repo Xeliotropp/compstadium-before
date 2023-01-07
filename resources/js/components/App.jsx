@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import Router from "../router/Router";
-import '../../css/app.css'
+import '../../../resources/css/App.css'
 import axios from "axios";
 
 axios.defaults.baseURL= "http://localhost:8000";
@@ -18,13 +18,3 @@ function App(){
 }
 
 export default App
-
-if (document.getElementById('example')) {
-    const Index = ReactDOM.createRoot(document.getElementById("example"));
-
-    Index.render(
-        <React.StrictMode>
-            <Example/>
-        </React.StrictMode>
-    )
-}

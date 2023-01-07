@@ -30,7 +30,7 @@ function Login() {
         }
 
         axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post(`login`, data).then(res => {
+                axios.post(`/login`, data).then(res => {
                     if (res.data.status === 200) {
                         localStorage.setItem('auth_token', res.data.token);
                         localStorage.setItem('auth_name', res.data.username);
@@ -63,19 +63,22 @@ function Login() {
     return (
         <>
         <Navbar/>
-            <div className='center'>   
+        <br></br>
+        <br></br>
+        <br></br>
+            <div className='center-login'>   
                 <form onSubmit={loginSubmit}>
-                    <h1>Login</h1>
+                    <h1><span style={{color:"#eb5160"}}>Log</span> In</h1>
                     <br></br>
                     <div className='login-elements'>
                         <div className="login-info">
                             <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
                                 <input placeholder ="Email" type="email" name="email" onChange={handleInput} value={loginInput.email} id="email"/>
-                                <span>{emailError}</span>
+                                {loginInput.error_list.email}
                             </div>
                             <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
                                 <input placeholder ="Password" type="password" name="password" onChange={handleInput} value={loginInput.password} id="password" />
-                                {passwordError}
+                                {loginInput.error_list.password}
                             </div>
                         </div>
                         
@@ -90,6 +93,9 @@ function Login() {
                     </div>
                 </form>               
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
             <Footer/>
         </>
     );

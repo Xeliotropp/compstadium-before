@@ -1,57 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "../frontend/Navbar";
 import Footer from "../frontend/Footer"
-
-import "../../../css/app.css"
+import '../../../css/App.css'
 
 function Home(){
+    const Ref = useRef();
     
     return(
         <>
         <Navbar/>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat expedita harum quaerat nemo veritatis rem vero nisi recusandae, voluptatem, accusantium perspiciatis aperiam iure qui totam? Perferendis fuga est illum incidunt?</p>
+        <body>
+            <div className="center">
+                <div className="menu-bar">
+                    <button>Home</button>
+                    <button>CPU</button>
+                    <button>GPU</button>
+                    <button>Motherboards</button>
+                    <button>SSD</button>
+                    <button>HDD</button>
+                    <button>RAM</button>
+                    <button>PSU</button>
+                </div>
+            </div>
+        </body>
         <Footer/>
         </>
     )

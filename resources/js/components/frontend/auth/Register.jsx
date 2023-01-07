@@ -7,7 +7,6 @@ import Footer from "../Footer"
 import "./css/login.css"
 
 function Register() {
-
     const navigate = useNavigate();
     const [registerInput, setRegister] = useState({
         name: '',
@@ -31,13 +30,13 @@ function Register() {
         }
 
         axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.post(`/register`, data).then(res => { 
+            axios.post(`http://localhost:8000/api/register`, data).then(res => { 
                 if(res.data.status === 200)
                 {
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.username);
                     swal("Success",res.data.message,"success");
-                    navigate.push('/');
+                    navigate('/');
                 }
                 else
                 {
@@ -51,29 +50,35 @@ function Register() {
     return (
         <>
         <Navbar/>
-            <div className='center'>
+            <div className='center-login'>   
                 <form onSubmit={registerSubmit}>
                     <h1>Register</h1>
                     <br></br>
-                    <div className="form-group mb-3">
-                        <input placeholder="Username" type="text" name="name" onChange={handleInput} value={registerInput.name} className="form-control"  />
-                        <span>{registerInput.error_list.name}</span>
+                    <div className='login-elements'>
+                        <div className="login-info">
+                            <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
+                                <input placeholder ="Username" type="username" name="username" onChange={handleInput} value={registerInput.username} id="username"/>
+                                {registerInput.error_list.email}
+                            </div>
+                            <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
+                                <input placeholder ="Email" type="email" name="email" onChange={handleInput} value={registerInput.email} id="email"/>
+                                {registerInput.error_list.email}
+                            </div>
+                            <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
+                                <input placeholder ="Password" type="password" name="password" onChange={handleInput} value={registerInput.password} id="password" />
+                                {registerInput.error_list.password}
+                            </div>
+                        </div>
+                        
+                        <div className="form-group mb-3">
+                            <button type="submit">Sign up</button>
+                        </div>
                     </div>
-                    <div className="form-group mb-3">
-                        <input placeholder="Email" type="text" name="email" onChange={handleInput} value={registerInput.email} className="form-control"  />
-                        <span>{registerInput.error_list.email}</span>
-                    </div>
-                    <div className="form-group mb-3">
-                        <input placeholder="Password" type="password" name="password" onChange={handleInput} value={registerInput.password} className="form-control"  />
-                        <span>{registerInput.error_list.password}</span>
-                    </div>
-                    <div className="form-group mb-3">
-                        <button type="submit" className="btn btn-primary">Register</button>
-                    </div>
-                    <div>
+                    <br></br>
+                    <div className='media-buttons'>
                         <button onClick={goBack}>Back</button>
                     </div>
-                </form>
+                </form>               
             </div>
             <Footer/>
         </>

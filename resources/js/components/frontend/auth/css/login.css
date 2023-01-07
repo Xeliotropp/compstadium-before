@@ -1,3 +1,6 @@
+:root {
+    --loginMainColor: #071013;
+}
 h1 {
     font-size: 48px;
 }
@@ -9,12 +12,13 @@ form {
     height: 600px;
     flex-flow: column;
     border-radius: 25px;
-    background: #eeeeee;
+    background: var(--loginMainColor);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-form button {
-    color: black;
-    background: #eeeeee;
+form button,
+h1 {
+    color: #eeee;
+    background: var(--loginMainColor);
 }
 .login-info {
     gap: 1rem;
@@ -31,7 +35,7 @@ form button {
     font-size: 32px;
     gap: 1rem;
 }
-.center {
+.center-login {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +62,7 @@ form button {
 .login-elements button {
     height: 60px;
     width: 100px;
-    background-color: #071013;
+    background-color: #eb5160;
     color: #ffff;
     border-radius: 5px;
     display: flex;
@@ -66,9 +70,11 @@ form button {
     justify-content: center;
 }
 .login-elements button:hover {
-    background-color: #eb5160;
+    transition: 0.2s;
+    opacity: 80%;
 }
 .media-buttons {
+    color: #eeee;
     display: flex;
     gap: 1em;
     flex-flow: column;
@@ -89,6 +95,6 @@ form button {
     #email,
     #password {
         position: relative;
-        width: 335px;
+        width: 320px;
     }
 }

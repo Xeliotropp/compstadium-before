@@ -4,9 +4,7 @@ import { useState } from "react";
 
 import { useRef } from "react";
 import { Divide as Hamburger } from "hamburger-react";
-import {CgProfile} from "react-icons/cg"
-
-import "../../../css/app.css";
+import '../../../css/App.css'
 
 function Navbar() {
   const NavRef = useRef();
@@ -52,7 +50,7 @@ function Navbar() {
           their profile (ex. change their username, pfp, about me, email and password)
           */}
           <button onClick={handleLogin}>
-            <CgProfile/>
+            Log In
           </button>
       </header>
     </>
