@@ -9,7 +9,7 @@ function Home(){
     return(
         <>
         <Navbar/>
-        <body>
+        <div className="main">
             <div className="center">
                 <div className="menu-bar">
                     <button>Home</button>
@@ -22,7 +22,7 @@ function Home(){
                     <button>PSU</button>
                 </div>
             </div>
-        </body>
+        </div>
         <Footer/>
         </>
     )

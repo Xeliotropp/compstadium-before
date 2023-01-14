@@ -14,8 +14,6 @@
     --footerMainColor: #071013;
     --footerSecondaryColor: #aaaaaa;
     --footerTextColor: #dfe0e2;
-    --bodyMainColor: #177e89;
-    --bodySecondaryColor: #051f1f;
     --bodyTextColor: #dfe0e2;
 }
 header {
@@ -83,11 +81,11 @@ header nav {
 header .responsive_nav {
     transform: none;
 }
-body {
+.main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: var(--bodyMainColor);
+    background-color: #bebebe;
 }
 footer {
     position: relative;

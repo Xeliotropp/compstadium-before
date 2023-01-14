@@ -18,6 +18,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@mui/icons-material": "^5.11.0",
+        "@mui/material": "^5.11.4",
         "hamburger-react": "^2.5.0",
         "react-icons": "^4.7.1",
         "react-router": "^6.6.1",

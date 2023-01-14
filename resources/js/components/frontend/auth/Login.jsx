@@ -1,104 +1,154 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
+import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import "./css/login.css"
-
-function Login() {
-
-    const navigate = useNavigate();
-    const login = useState({
-        email: '',
-        password: '',
-        error_list: [],
-    });
-    let [loginInput, setLogin] = login;
-    const handleInput = (e) => {
-        e.persist();
-        setLogin({...loginInput, [e.target.name]: e.target.value });
-    }
-
-    const loginSubmit = (e) => {
-        e.preventDefault();
-        
-        const data = {
-            email: loginInput.email,
-            password: loginInput.password,
-        }
-
-        axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post(`/login`, data).then(res => {
-                    if (res.data.status === 200) {
-                        localStorage.setItem('auth_token', res.data.token);
-                        localStorage.setItem('auth_name', res.data.username);
-                        swal("Success", res.data.message, "success");
-                        if (res.data.role === 'admin') {
-                            navigate('/admin/dashboard');
-                        }
-
-                        else {
-                            navigate('/');
-                        }
-                    }
-                    else if (res.data.status === 401) {
-                        swal("Warning", res.data.message, "warning");
-                    }
-
-                    else {
-                        setLogin({ ...loginInput, error_list: res.data.validation_errors });
-                    }
-                });
-            });
-
-    }
-    const goRegister = () => {navigate('/register')} 
-    const goBack = () =>{navigate('/')}
-
-    const emailError = loginInput.error_list ? <span>{loginInput.error_list.email}</span> : null;
-    const passwordError = loginInput.error_list ? <span>{loginInput.error_list.password}</span> : null;
-
-    return (
-        <>
-        <Navbar/>
-        <br></br>
-        <br></br>
-        <br></br>
-            <div className='center-login'>   
-                <form onSubmit={loginSubmit}>
-                    <h1><span style={{color:"#eb5160"}}>Log</span> In</h1>
-                    <br></br>
-                    <div className='login-elements'>
-                        <div className="login-info">
-                            <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
-                                <input placeholder ="Email" type="email" name="email" onChange={handleInput} value={loginInput.email} id="email"/>
-                                {loginInput.error_list.email}
-                            </div>
-                            <div className="form-group mb-3" style={{display:"flex",flexFlow:"column", textAlign:"center"}}>
-                                <input placeholder ="Password" type="password" name="password" onChange={handleInput} value={loginInput.password} id="password" />
-                                {loginInput.error_list.password}
-                            </div>
-                        </div>
-                        
-                        <div className="form-group mb-3">
-                            <button type="submit">Sign in</button>
-                        </div>
-                    </div>
-                    <br></br>
-                    <div className='media-buttons'>
-                        <button onClick={goRegister}>Don't have an account? Click here to create!</button>
-                        <button onClick={goBack}>Back</button>
-                    </div>
-                </form>               
-            </div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <Footer/>
-        </>
-    );
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
-export default Login;
+const theme = createTheme();
+
+export default function Login() {
+  const navigate = useNavigate();
+  const login = useState({
+      email: '',
+      password: '',
+      error_list: [],
+  });
+  let [loginInput, setLogin] = login;
+  const handleInput = (e) => {
+      e.persist();
+      setLogin({...loginInput, [e.target.name]: e.target.value });
+  }
+  const loginSubmit = (e) => {
+      e.preventDefault();
+      
+      const data = {
+          email: loginInput.email,
+          password: loginInput.password,
+      }
+      axios.get('/sanctum/csrf-cookie').then(response => {
+              axios.post(`http://localhost:8000/api/login`, data).then(res => {
+                  if (res.data.status === 200) {
+                      localStorage.setItem('auth_token', res.data.token);
+                      localStorage.setItem('auth_name', res.data.username);
+                      swal("Success", res.data.message, "success");
+                      if (res.data.role === 'admin') {
+                          navigate('/admin/dashboard');
+                      }
+                      else {
+                          navigate('/');
+                      }
+                  }
+                  else if (res.data.status === 401) {
+                      swal("Warning", res.data.message, "warning");
+                  }
+                  else {
+                      setLogin({ ...loginInput, error_list: res.data.validation_errors });
+                  }
+              });
+          });
+  }
+
+  return (
+    <>
+    <Navbar/>
+    <div>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={loginSubmit} noValidate sx={{ mt: 1 }} >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={handleInput}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handleInput}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="http://localhost:8000/register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+      </ThemeProvider>
+    </div>
+    </>
+
+  );
+}
