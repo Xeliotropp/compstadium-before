@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
+use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +17,25 @@ use App\Http\Controllers\API\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('register',[AuthController::class,'register']);
-Route::post('login',[AuthController::class,'login']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
+    Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
+});
+
+require __DIR__.'/auth.php';
