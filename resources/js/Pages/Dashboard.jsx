@@ -1,8 +1,11 @@
+import Navbar from '@/Components/Navbar';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/inertia-react';
 
 export default function Dashboard(props) {
     return (
+        <>
+        <Navbar/>
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
@@ -18,5 +21,7 @@ export default function Dashboard(props) {
                 </div>
             </div>
         </AuthenticatedLayout>
+        </>
+
     );
 }

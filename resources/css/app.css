@@ -216,3 +216,6 @@ a:visited {
         display: none;
     }
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

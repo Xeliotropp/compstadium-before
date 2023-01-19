@@ -164,9 +164,10 @@ export default function Register({ status }) {
 
 
     return (
+        <>
+        <Navbar/>
         <GuestLayout>
             <Head title="Register" />
-            <Navbar/>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <ThemeProvider theme={theme}>
               <Container component="main" maxWidth="xs">
@@ -258,5 +259,6 @@ export default function Register({ status }) {
               </Container>
             </ThemeProvider>
     </GuestLayout>
+        </>
     );
 }
