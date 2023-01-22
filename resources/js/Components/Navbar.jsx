@@ -1,13 +1,18 @@
 import React from "react";
+import { ReactDOM } from "react";
 import { useState } from "react";
 
 import { useRef } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import {CgProfile} from "react-icons/cg";
 import '../../css/app.css'
+import { useNavigate } from "react-router";
 
 export default function Navbar() {
-
+  {/*fix this*/}
+  function goHome() {
+    return useNavigate("/");
+  }
   const NavRef = useRef();
   const [isOpen, setOpen] = useState(false)
   const ShowNavbar = () => {
@@ -32,14 +37,18 @@ export default function Navbar() {
         <button onClick={ShowNavbar}>  <Hamburger toggled={isOpen} toggle={setOpen} /></button>
 
         {/*logo*/}
-        <a href="/">
+        <button onClick={goHome}>
           <h2 className="logo">
             <span style={{ color: "#eb5160" }}>comp</span>stadium
           </h2>
-        </a>
-        <a href="/login">
-          <CgProfile/>
-        </a> 
+        </button>
+
+          {/* redirect to login/register page if the user doesn't have a profile else redirect the user to a page that show's their info and they can edit
+          their profile (ex. change their username, pfp, about me, email and password)
+          */}
+          <a href="/login">
+            <CgProfile/>
+          </a>
       </header>
     </>
   );
