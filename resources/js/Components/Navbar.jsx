@@ -1,28 +1,25 @@
 import React from "react";
-import { ReactDOM } from "react";
 import { useState } from "react";
 
 import { useRef } from "react";
 import { Divide as Hamburger } from "hamburger-react";
-import {CgProfile} from "react-icons/cg";
+import { CgProfile } from "react-icons/cg";
 import '../../css/app.css'
-import { useNavigate } from "react-router";
+import ApplicationLogo from "./ApplicationLogo";
+import { MobileView, BrowserView } from "react-device-detect";
 
-export default function Navbar() {
-  {/*fix this*/}
-  function goHome() {
-    return useNavigate("/");
-  }
+
+const DesktopView = () => {
   const NavRef = useRef();
   const [isOpen, setOpen] = useState(false)
   const ShowNavbar = () => {
     NavRef.current.classList.toggle("responsive_nav");
   };
   return (
-    <>
-      <header>
+    <BrowserView>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <nav ref={NavRef}>
-          {/*the side buttons that appear when the hamburger menu icon is clicked*/}  
+          {/*the side buttons that appear when the hamburger menu icon is clicked*/}
           <button>Home</button>
           <button>CPU</button>
           <button>GPU</button>
@@ -31,24 +28,63 @@ export default function Navbar() {
           <button>HDD</button>
           <button>RAM</button>
           <button>PSU</button>
+          <button>Cart</button>
         </nav>
 
         {/*hamburger menu button*/}
-        <button onClick={ShowNavbar}>  <Hamburger toggled={isOpen} toggle={setOpen} /></button>
+        <button id="hideOnMobile" onClick={ShowNavbar}>  <Hamburger toggled={isOpen} toggle={setOpen} /></button>
 
         {/*logo*/}
-        <button onClick={goHome}>
-          <h2 className="logo">
-            <span style={{ color: "#eb5160" }}>comp</span>stadium
-          </h2>
-        </button>
+        <a href="/" style={{ textDecoration: "none", }}>
+          <ApplicationLogo />
+        </a>
 
-          {/* redirect to login/register page if the user doesn't have a profile else redirect the user to a page that show's their info and they can edit
+        {/* redirect to login/register page if the user doesn't have a profile else redirect the user to a page that show's their info and they can edit
           their profile (ex. change their username, pfp, about me, email and password)
           */}
+        <span style={{ display: "flex", gap: "1rem", fontSize: "18px" }}>
+          <a id="hideOnMobile" href="/">Cart</a>
           <a href="/login">
-            <CgProfile/>
+            <CgProfile />
           </a>
+        </span>
+      </div>
+    </BrowserView>
+  );
+}
+const PhoneView = () => {
+  const NavRef = useRef();
+  const ShowNavbar = () => {
+    NavRef.current.classList.toggle("responsive_nav");
+  };
+  return (
+    <MobileView>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.2rem" }}>
+        <nav ref={NavRef}>
+          {/*the side buttons that appear when the hamburger menu icon is clicked*/}
+          <button>Home</button>
+          <button>CPU</button>
+          <button>GPU</button>
+          <button>Motherboards</button>
+          <button>SSD</button>
+          <button>HDD</button>
+          <button>RAM</button>
+          <button>PSU</button>
+          <button>Cart</button>
+        </nav>
+        <button onClick={ShowNavbar}> <ApplicationLogo /></button>
+        <a href="/login"><CgProfile /></a>
+      </div>
+    </MobileView>
+  );
+
+}
+export default function Navbar() {
+  return (
+    <>
+      <header>
+        <DesktopView />
+        <PhoneView />
       </header>
     </>
   );

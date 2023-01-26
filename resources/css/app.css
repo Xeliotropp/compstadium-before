@@ -85,13 +85,10 @@ header .responsive_nav {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #bebebe;
 }
 footer {
     position: relative;
-    margin-top: auto;
-    padding: 1%;
-    height: 17%;
+    padding-bottom: 1%;
     display: grid;
     align-items: center;
     width: 100%;
@@ -164,29 +161,6 @@ a:visited {
     align-items: center;
     justify-content: center;
 }
-.menu-bar {
-    background-color: var(--navbarMainColor);
-    width: 75%;
-    height: 80px;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4.5rem;
-    border-radius: 15px;
-    top: 100px;
-}
-.menu-bar button:hover {
-    font-size: 24px;
-    transition: 0.3s;
-    transform: translateY(0px);
-    transition: 0.3s;
-}
-@media (max-height: 480px) {
-    .menu-bar {
-        display: none;
-    }
-}
 @media (orientation: portrait) {
     header nav {
         width: 36%;
@@ -208,14 +182,10 @@ a:visited {
         position: relative;
         font-size: 1rem;
     }
-    .menu-bar {
-        display: none;
-        height: 0;
-    }
     .center {
         display: none;
     }
+    #hideOnMobile {
+        display: none;
+    }
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

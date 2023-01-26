@@ -16,60 +16,62 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Footer from '@/Components/Footer';
 
 
 const theme = createTheme();
 export default function Login({ status, canResetPassword }) {
-  
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: '',
-    });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: '',
+    password: '',
+    remember: '',
+  });
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+  useEffect(() => {
+    return () => {
+      reset('password');
     };
+  }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
+  const onHandleChange = (event) => {
+    setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+  };
 
-        post(route('login'));
-    };
+  const submit = (e) => {
+    e.preventDefault();
+
+    post(route('login'));
+  };
 
 
-    return (
-      <>
-      <Navbar/>
-      <GuestLayout>
-        <Head title="Log in" />
-        
-        {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-        <ThemeProvider theme={theme}>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-              sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-              <Box component="form" onSubmit={submit} noValidate sx={{ mt: 1 }} >
-                <TextField
+  return (
+    <>
+      <Navbar />
+      <div className="main">
+        <GuestLayout>
+          <Head title="Log in" />
+
+          {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
+                <Box component="form" onSubmit={submit} noValidate sx={{ mt: 1 }} >
+                  <TextField
                     margin="normal"
                     fullWidth
                     id="email"
@@ -80,51 +82,53 @@ export default function Login({ status, canResetPassword }) {
                     autoComplete="username"
                     onChange={onHandleChange}
                     label="Email Address"
-                />
-                <InputError message={errors.email} className="mt-2" />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={onHandleChange}
-                />
-                <InputError message={errors.password} className="mt-2" />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    {canResetPassword &&(
+                  />
+                  <InputError message={errors.email} className="mt-2" />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={onHandleChange}
+                  />
+                  <InputError message={errors.password} className="mt-2" />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      {canResetPassword && (
                         <Link href={route('password.request')} variant="body2">
-                      Forgot password?
-                    </Link>
-                    )}
+                          Forgot password?
+                        </Link>
+                      )}
+                    </Grid>
+                    <Grid item>
+                      <Link href="http://localhost:8000/register" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Link href="http://localhost:8000/register" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
+                </Box>
               </Box>
-            </Box>
-          </Container>
-        </ThemeProvider>
-    </GuestLayout>
-      </>
-    );
+            </Container>
+          </ThemeProvider>
+        </GuestLayout>
+      </div>
+      <Footer />
+    </>
+  );
 }

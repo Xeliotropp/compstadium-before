@@ -257,9 +257,11 @@ import Navbar from '@/Components/Navbar';
 export default function Welcome(props) {
     return (
         <>
-            <Navbar/>
-            <div className="main"></div>
-            <Footer/>
+            <Navbar />
+            <div className="main">
+
+            </div>
+            <Footer />
         </>
     );
 }

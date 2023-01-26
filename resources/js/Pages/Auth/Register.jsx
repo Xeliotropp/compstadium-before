@@ -135,130 +135,134 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Footer from '@/Components/Footer';
 
 
 const theme = createTheme();
 export default function Register({ status }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
-
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+  useEffect(() => {
+    return () => {
+      reset('password', 'password_confirmation');
     };
+  }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
+  const onHandleChange = (event) => {
+    setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+  };
 
-        post(route('register'));
-    };
+  const submit = (e) => {
+    e.preventDefault();
+
+    post(route('register'));
+  };
 
 
-    return (
-        <>
-        <Navbar/>
+  return (
+    <>
+      <Navbar />
+      <div className="main">
         <GuestLayout>
-            <Head title="Register" />
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-            <ThemeProvider theme={theme}>
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
-                  </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Sign up
-                  </Typography>
-                  <Box component="form" onSubmit={submit} noValidate sx={{ mt: 1 }} >
-                    <TextField
+          <Head title="Register" />
+          {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign up
+                </Typography>
+                <Box component="form" onSubmit={submit} noValidate sx={{ mt: 1 }} >
+                  <TextField
                     required
-                        margin="normal"
-                        fullWidth
-                        id="name"
-                        type="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={onHandleChange}
-                        label="Username"
-                    />
-                    <InputError message={errors.name} className="mt-2" />
-                    <TextField
-                        margin="normal"
-                        fullWidth
-                        required
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="email"
-                        onChange={onHandleChange}
-                        label="Email Address"
-                    />
-                    <InputError message={errors.email} className="mt-2" />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      onChange={onHandleChange}
-                    />
-                    <InputError message={errors.password} className="mt-2" />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password_confirmation"
-                      label="Confirm Password"
-                      type="password_confirmation"
-                      id="password_confirmation"
-                      onChange={onHandleChange}  
-                      value={data.password_confirmation}
-                    />
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                    >
-                      Sign In
-                    </Button>
-                    <Grid container>
-                      <Grid item>
-                        <Link href="http://localhost:8000/login" variant="body2">
-                          {"Already registered? Sign In!"}
-                        </Link>
-                      </Grid>
+                    margin="normal"
+                    fullWidth
+                    id="name"
+                    type="name"
+                    name="name"
+                    value={data.name}
+                    className="mt-1 block w-full"
+                    autoComplete="username"
+                    onChange={onHandleChange}
+                    label="Username"
+                  />
+                  <InputError message={errors.name} className="mt-2" />
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    required
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={data.email}
+                    className="mt-1 block w-full"
+                    autoComplete="email"
+                    onChange={onHandleChange}
+                    label="Email Address"
+                  />
+                  <InputError message={errors.email} className="mt-2" />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={onHandleChange}
+                  />
+                  <InputError message={errors.password} className="mt-2" />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password_confirmation"
+                    label="Confirm Password"
+                    type="password_confirmation"
+                    id="password_confirmation"
+                    onChange={onHandleChange}
+                    value={data.password_confirmation}
+                  />
+                  <InputError message={errors.password_confirmation} className="mt-2" />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item>
+                      <Link href="http://localhost:8000/login" variant="body2">
+                        {"Already registered? Sign In!"}
+                      </Link>
                     </Grid>
-                  </Box>
+                  </Grid>
                 </Box>
-              </Container>
-            </ThemeProvider>
-    </GuestLayout>
-        </>
-    );
+              </Box>
+            </Container>
+          </ThemeProvider>
+        </GuestLayout>
+      </div>
+      <Footer />
+    </>
+  );
 }
