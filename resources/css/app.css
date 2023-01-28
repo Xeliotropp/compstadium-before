@@ -161,6 +161,21 @@ a:visited {
     align-items: center;
     justify-content: center;
 }
+/*
+.relative {
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+button:hover + .hidden,
+.hidden:hover {
+    display: block;
+}
+*/
+
 @media (orientation: portrait) {
     header nav {
         width: 36%;
