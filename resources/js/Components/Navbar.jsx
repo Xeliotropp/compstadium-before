@@ -1,18 +1,17 @@
 import React from "react";
 import { useState } from "react";
+
 import { useRef } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import { CgProfile } from "react-icons/cg";
-import "../../css/app.css";
+import '../../css/app.css'
 import ApplicationLogo from "./ApplicationLogo";
 import { MobileView, BrowserView } from "react-device-detect";
-import { FaShoppingCart } from "react-icons/fa";
-import ResponsiveNavLink from "./ResponsiveNavLink";
+
 
 const DesktopView = () => {
   const NavRef = useRef();
   const [isOpen, setOpen] = useState(false)
-  const [isItOpen, setItOpen] = useState(false)
   const ShowNavbar = () => {
     NavRef.current.classList.toggle("responsive_nav");
   };
@@ -44,23 +43,11 @@ const DesktopView = () => {
           their profile (ex. change their username, pfp, about me, email and password)
           */}
         <span style={{ display: "flex", gap: "1rem", fontSize: "18px" }}>
-          <button><FaShoppingCart /></button>
-          <button onClick={() => setItOpen(!isItOpen)}>
+          <a id="hideOnMobile" href="/">Cart</a>
+          <a href="/login">
             <CgProfile />
-          </button>
+          </a>
         </span>
-        {isItOpen && (
-          <ul style={{ position: "absolute", top: "114px", right: "16px", zIndex: "1", backgroundColor: "black" }}>
-            <li className="py-2">
-              <a href="/profile" className="block">Profile</a>
-            </li>
-            <li className="py-2">
-              <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                Log Out
-              </ResponsiveNavLink>
-            </li>
-          </ul>
-        )}
       </div>
     </BrowserView>
   );
