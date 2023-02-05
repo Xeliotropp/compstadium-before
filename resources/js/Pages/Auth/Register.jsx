@@ -125,7 +125,7 @@ import InputError from '@/Components/InputError';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { Head, useForm } from '@inertiajs/inertia-react';
-import Navbar from '@/Components/Navbar';
+import Navbar from '@/Layouts/user/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -135,7 +135,7 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Footer from '@/Components/Footer';
+import Footer from '@/Layouts/user/Footer';
 
 
 const theme = createTheme();
