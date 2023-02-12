@@ -1,5 +1,5 @@
-import Footer from '@/Layouts/user/Footer';
-import Navbar from '@/Layouts/user/Navbar';
+import Footer from '@/Components/Footer';
+import Navbar from '@/Components/Navbar';
 //import { Link, Head } from '@inertiajs/inertia-react';
 //          <Head title="Welcome" />
 //           <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">

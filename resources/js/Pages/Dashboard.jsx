@@ -1,4 +1,4 @@
-import Navbar from '@/Layouts/user/Navbar';
+import Navbar from '@/Components/Navbar';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/inertia-react';
 

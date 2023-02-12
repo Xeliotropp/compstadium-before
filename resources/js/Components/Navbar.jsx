@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import { CgProfile } from "react-icons/cg";
-import '../../../css/app.css';
-import ApplicationLogo from "../../Components/ApplicationLogo";
+import '../../css/app.css';
+import ApplicationLogo from "./ApplicationLogo";
 import { MobileView, BrowserView } from "react-device-detect";
 import { FaShoppingCart } from "react-icons/fa";
-import ResponsiveNavLink from "../../Components/ResponsiveNavLink";
+import ResponsiveNavLink from "./ResponsiveNavLink";
 
 const DesktopView = () => {
   const NavRef = useRef();

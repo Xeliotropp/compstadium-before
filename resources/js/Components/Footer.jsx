@@ -1,4 +1,4 @@
-import '../../../css/app.css';
+import '../../css/app.css';
 import { FaFacebook, FaGithub, FaReddit, FaTelegramPlane, FaPhoneAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
