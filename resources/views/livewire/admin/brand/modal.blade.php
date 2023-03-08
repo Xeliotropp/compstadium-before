@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="AddBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
-                    <button type="button" class="btn btn-primary">Запази промените</button>
+                    <button type="submit" class="btn btn-primary">Запази промените</button>
                 </div>
             </form>
         </div>

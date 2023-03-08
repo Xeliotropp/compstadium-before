@@ -1,3 +1,5 @@
+@extends('layouts.admin')
+@section('content')
 <div>
     @include('livewire.admin.brand.modal')
     <div class="row">
@@ -5,7 +7,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Списък с марки</h4>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#AddBrandModal"> class="btn btn-primary">Добави
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#AddBrandModal"
+                        class="btn btn-primary float-end">Добави
                         марки</a>
                 </div>
                 <div class="card-body">
@@ -25,3 +28,11 @@
         </div>
     </div>
 </div>
+@push('script')
+<script>
+    window.addEventListener('close-modal', event=>{
+            $('#addBrandModal').modal('hide');
+        });
+</script>
+@endpush
+@endsection

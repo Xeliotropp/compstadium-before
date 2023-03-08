@@ -41,21 +41,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @forelse ($brands as $brand)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->status == '1' ? 'Скрит':'Видим'}}</td>
+                                <td>{{$brand->id}}</td>
+                                <td>{{$brand->name}}</td>
+                                <td>{{$brand->slug}}</td>
+                                <td>{{$brand->status == '1' ? 'скрит':'видим'}}</td>
                                 <td>
-                                    <a href="{{ route('admin.category.edit', ['category_id' => $category->id]) }}"
-                                        class="btn btn-success">Редактирай</a>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        wire:click='deleteCategory({{$category->id}})' class="btn btn-danger">Изтрий</a>
+                                    <a href="" class="btn btn-sm btn-success">Редактиране</a>
+                                    <a href="" class="btn btn-sm btn-danger">Изтриване</a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr colspan="5">Няма намерени марки</tr>
+                            @endforelse
                         </tbody>
                     </table>
+                    <div>
+                        {{$brands->links()}}
+                    </div>
 
                     <div>{{$categories->links()}}</div>
                 </div>

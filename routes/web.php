@@ -47,6 +47,5 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/users/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'update']);
 
     //Brands routes
-
-    Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class]);
+    Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class, 'render']);
 });
