@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,31 +10,43 @@ use Inertia\Inertia;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Auth::routes();
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
-    Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Admin routes
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
+
+    //Category routes
+
+    //Category edit routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index');
+        Route::get('/category/create', 'index');
+        Route::post('/category', 'store');
+        Route::put('/category/{category}', 'update');
+    });
+    //Category create routes
+    Route::get('category', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
+    Route::get('category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
+    Route::get('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::post('category', [\App\Http\Controllers\Admin\CategoryController::class, 'store']);
+
+    //Edit user routes
+    Route::get('/users', [\App\Http\Controllers\Admin\UserEditController::class, 'index']);
+    Route::get('/users/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'update']);
+
+    //Brands routes
+
+    Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class]);
 });
-
-require __DIR__.'/auth.php';
