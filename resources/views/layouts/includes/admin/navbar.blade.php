@@ -4,7 +4,7 @@
       <a class="navbar-brand brand-logo" href="/">
         <img src="{{asset('frontend/assets/images/logo.png')}}" alt="logo">
       </a>
-      <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+      <a class="navbar-brand brand-logo-mini" href="/"><img src="images/logo-mini.svg" alt="logo" /></a>
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
         <span class="mdi mdi-sort-variant"></span>
       </button>
@@ -122,7 +122,6 @@
       </li>
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-          <img src="images/faces/face5.jpg" alt="profile" />
           <span class="nav-profile-name">{{Auth::user()->name}}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

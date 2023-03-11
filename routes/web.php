@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\CategoryController;
@@ -47,5 +48,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/users/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'update']);
 
     //Brands routes
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/brands', 'index');
+        Route::get('/brands/create', 'index');
+        Route::post('/brands', 'store');
+    });
     Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class, 'render']);
+    Route::get('brands/create', [\App\Http\Controllers\Admin\BrandController::class, 'create']);
+    Route::post('brands', [\App\Http\Controllers\Admin\BrandController::class, 'store']);
 });

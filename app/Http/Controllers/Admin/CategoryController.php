@@ -42,7 +42,7 @@ class CategoryController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $path = $file->storeAs('uploads/category', $filename);
+            $path = $file->storeAs('storage/uploads/category', $filename);
             $category->image = $path;
         }
 
@@ -72,12 +72,12 @@ class CategoryController extends Controller
         $category->slug = SlugService::createSlug(Category::class, 'slug', $validatedData['name']);
 
         if ($request->hasFile('image')) {
-            $path = 'storage/category-photos' . $category->image;
+            $path = 'storage/uploads/category' . $category->image;
             if (File::exists($path)) {
                 File::delete($path);
             }
             $fileName = time() . '.' . $request->image->extension();;
-            $request->image->move(public_path('storage/category-photos'), $fileName);
+            $request->image->move(public_path('storage/uploads/category'), $fileName);
         }
 
         $category->status = $request->status == true ? '1' : '0';

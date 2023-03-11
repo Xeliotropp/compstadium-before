@@ -9,7 +9,8 @@
                 <a href="{{url('admin/category/')}}" class="btn btn-primary float-end text-white">Назад</a>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/category'.$category->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('admin/category/'.$category->id.'/update')}}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -37,7 +38,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="image">Снимка</label>
                             <input type="file" name="image" class="form-control">
-                            <img src="{{asset('uploads.category/'.$category->image)}}" width="60px" height="60px">
+                            <img src="{{ asset('storage/uploads/category/'.$category->image) }}" width="60px"
+                                height="60px">
                             @error('image')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -78,7 +80,7 @@
                         </div>
 
                         <div class="col-md-12 mb-3">
-                            <button class="btn btn-primary text-white">Запази промените</button>
+                            <button type="submit" class="btn btn-primary text-white">Запази промените</button>
                         </div>
                     </div>
                 </form>

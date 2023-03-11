@@ -16,15 +16,15 @@ class Index extends Component
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|string',
+            'slug' => 'required|unique:brands',
             'status' => 'nullable'
         ];
     }
     public function resetInput()
     {
-        $this->name = NULL;
-        $this->slug = NULL;
-        $this->status = NULL;
+        $this->name = '';
+        $this->slug = '';
+        $this->status = '';
     }
     public function storeBrand()
     {
