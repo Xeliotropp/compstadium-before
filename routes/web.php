@@ -29,8 +29,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
     //Category routes
-
-    //Category edit routes
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index');
         Route::get('/category/create', 'index');
@@ -40,20 +38,24 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //Category create routes
     Route::get('category', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
     Route::get('category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
-    Route::get('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::post('category', [\App\Http\Controllers\Admin\CategoryController::class, 'store']);
+    //Category update routes
+    Route::get('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::put('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'update']);
 
     //Edit user routes
     Route::get('/users', [\App\Http\Controllers\Admin\UserEditController::class, 'index']);
-    Route::get('/users/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'update']);
 
     //Brands routes
     Route::controller(BrandController::class)->group(function () {
         Route::get('/brands', 'index');
         Route::get('/brands/create', 'index');
         Route::post('/brands', 'store');
+        Route::put('/brands/{brand}', 'update');
     });
     Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class, 'render']);
     Route::get('brands/create', [\App\Http\Controllers\Admin\BrandController::class, 'create']);
+    Route::get('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'edit'])->name('admin.brands.edit');
+    Route::put('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'update']);
     Route::post('brands', [\App\Http\Controllers\Admin\BrandController::class, 'store']);
 });

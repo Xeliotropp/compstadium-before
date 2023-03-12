@@ -9,7 +9,7 @@
                 <a href="{{url('admin/category/')}}" class="btn btn-primary float-end text-white">Назад</a>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/category/'.$category->id.'/update')}}" method="POST"
+                <form action="{{route('admin.category.edit',$category->id)}}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

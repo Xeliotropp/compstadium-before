@@ -27,37 +27,36 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h3>Категории</h3>
-                    <a href="{{url('admin/category/create')}}" class="btn btn-primary float-end">Добави категория</a>
+                    <h3>Потребители</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Идентификационен номер</th>
+                                <th>ID</th>
                                 <th>Име</th>
-                                <th>Статус</th>
-                                <th>Действие</th>
+                                <th>Имейл</th>
+                                <th>Роля (0 = потребител, 1 = админ)</th>
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($users as $user)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->status == '1' ? 'Скрит':'Видим'}}</td>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->role_as}}</td>
                                 <td>
-                                    <a href="{{ route('admin.category.edit', ['category_id' => $category->id]) }}"
-                                        class="btn btn-success">Редактирай</a>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        wire:click='deleteCategory({{$category->id}})' class="btn btn-danger">Изтрий</a>
+                                    <a href="" class="btn btn-success">Редактирай</a>
+                                    <a href="" class="btn btn-danger">Изтрий</a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
 
-                    <div>{{$categories->links()}}</div>
+                    <div>{{$users->links()}}</div>
                 </div>
             </div>
         </div>

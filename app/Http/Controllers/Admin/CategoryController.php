@@ -61,13 +61,11 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validated();
         $category = Category::findOrFail($category);
-        $category = new Category([
-            'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
-            'meta_title' => $validatedData['meta_title'],
-            'meta_keyword' => $validatedData['meta_keyword'],
-            'meta_description' => $validatedData['meta_description'],
-        ]);
+        $category->name = $validatedData['name'];
+        $category->description = $validatedData['description'];
+        $category->meta_title = $validatedData['meta_title'];
+        $category->meta_keyword = $validatedData['meta_keyword'];
+        $category->meta_description = $validatedData['meta_description'];
 
         $category->slug = SlugService::createSlug(Category::class, 'slug', $validatedData['name']);
 

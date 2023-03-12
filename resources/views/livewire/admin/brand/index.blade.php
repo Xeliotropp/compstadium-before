@@ -28,7 +28,8 @@
                                 <td>{{$brand->slug}}</td>
                                 <td>{{$brand->status == '1' ? 'скрит':'видим'}}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-success">Редактиране</a>
+                                    <a href="{{ route('admin.brands.edit', ['brand_id' => $brand->id]) }}"
+                                        class="btn btn-sm btn-success">Редактиране</a>
                                     <a href="" class="btn btn-sm btn-danger">Изтриване</a>
                                 </td>
                             </tr>
