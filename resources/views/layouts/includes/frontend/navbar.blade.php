@@ -10,11 +10,11 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="/home" class="active">Начало</a></li>
+                        <li class="scroll-to-section"><a href="/" class="active">Начало</a></li>
                         <li class="scroll-to-section"><a href="">За нас</a></li>
-                        <li class="scroll-to-section"><a href="">Продукти</a></li>
-                        <li class="scroll-to-section"><a href="">Услуги</a></li>
-                        <li class="scroll-to-section"><a href="">Количка</a></li>
+                        <li class="scroll-to-section"><a href="/home">Продукти</a></li>
+                        <li class="scroll-to-section"><a href="/#services">Услуги</a></li>
+                        <li class="scroll-to-section"><a href="/cart">Количка</a></li>
                         @guest
                         <li>
                             <div class="gradient-button"><a id="modal_trigger" href="{{route('login')}}"><i
@@ -33,7 +33,7 @@
                                 @if (Auth::user()->role_as == 1)
                                 <a class="dropdown-item" href="/admin/dashboard">{{__('Админ панел')}}</a>
                                 @else
-                                <a class="dropdown-item" href="#">{{__('Профил')}}</a>
+                                <a class="dropdown-item" href="/profile/dashboard">{{__('Профил')}}</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

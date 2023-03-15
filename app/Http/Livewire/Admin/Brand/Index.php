@@ -12,6 +12,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $name, $slug, $status;
+    public $brand_id;
     public function rules()
     {
         return [
@@ -37,6 +38,19 @@ class Index extends Component
         session()->flash('message', 'Успешно добавяне на марка!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
+    }
+    public function deleteBrand($id)
+    {
+        $this->brand_id = $id;
+        $this->dispatchBrowserEvent('show-delete-modal');
+    }
+
+    public function destroyBrand()
+    {
+        $brand = Brand::findOrFail($this->brand_id);
+        $brand->delete();
+        session()->flash('message', 'Успешно изтрита марка!');
+        $this->dispatchBrowserEvent('close-delete-modal');
     }
     public function render()
     {

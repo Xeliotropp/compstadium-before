@@ -34,9 +34,10 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Идентификационен номер</th>
+                                <th>ID</th>
                                 <th>Име</th>
                                 <th>Статус</th>
+                                <th>Снимка</th>
                                 <th>Действие</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->status == '1' ? 'Скрит':'Видим'}}</td>
+                                <td>{{$category->image}}</td>
                                 <td>
                                     <a href="{{ route('admin.category.edit', ['category_id' => $category->id]) }}"
                                         class="btn btn-success">Редактирай</a>

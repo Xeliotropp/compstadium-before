@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserEditController;
+use App\Http\Controllers\Frontend\UserDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::put('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'update']);
 
     //Edit user routes
+    Route::controller(UserEditController::class)->group(function () {
+        Route::get('/users', 'index');
+        //Route::put('/users/{user}', 'update');
+    });
     Route::get('/users', [\App\Http\Controllers\Admin\UserEditController::class, 'index']);
+    Route::get('/users/{user_id}/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'edit'])->name('admin.users.edit');
 
     //Brands routes
     Route::controller(BrandController::class)->group(function () {
@@ -58,4 +66,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'edit'])->name('admin.brands.edit');
     Route::put('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'update']);
     Route::post('brands', [\App\Http\Controllers\Admin\BrandController::class, 'store']);
+});
+
+//User routes
+Route::prefix('profile')->middleware(['auth'])->group(function () {
+    Route::get('dashboard', [UserDashboardController::class, 'index']);
+    //Edit profile routes
+    Route::get('orders');
+    Route::get('{user_id}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
 });

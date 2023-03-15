@@ -1,18 +1,18 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Изтрий категория/h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="deleteModal">Изтрий категория</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent='destroyCategory'>
                     <div class="modal-body">
                         <h6>Сигурни ли сте, че искате да изтриете информацията?</h6>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
                         <button type="submit" class="btn btn-danger">Да. Изтрий</button>
                     </div>
                 </form>
@@ -48,7 +48,8 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->role_as}}</td>
                                 <td>
-                                    <a href="" class="btn btn-success">Редактирай</a>
+                                    <a href="{{ route('admin.users.edit', ['user_id' => $user->id]) }}"
+                                        class="btn btn-success">Редактирай</a>
                                     <a href="" class="btn btn-danger">Изтрий</a>
                                 </td>
                             </tr>

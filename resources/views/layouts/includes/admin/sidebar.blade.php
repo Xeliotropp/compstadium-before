@@ -22,7 +22,7 @@
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/admin/users/edit">
+      <a class="nav-link" href="/admin/users">
         <i class="mdi mdi-account menu-icon"></i>
         <span class="menu-title">Потребители</span>
       </a>

@@ -63,8 +63,8 @@
     <!-- End custom js for this page-->
 
     <!-- Scripts -->
-    @livewireScripts
     @stack('script')
+    @livewireScripts
 </body>
 
 </html>
