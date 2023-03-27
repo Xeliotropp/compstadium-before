@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\ErrorHandlerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserEditController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 
@@ -26,6 +28,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/error', [\App\Http\Controllers\ErrorHandlerController::class, 'error404'])->name('error');
 
 //Admin routes
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
@@ -66,6 +69,17 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'edit'])->name('admin.brands.edit');
     Route::put('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'update']);
     Route::post('brands', [\App\Http\Controllers\Admin\BrandController::class, 'store']);
+
+    //Product routes
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('products', 'index');
+        Route::get('products/create', 'create');
+        Route::post('products', 'store');
+        Route::get('products/edit/{id}', 'edit');
+        Route::put('products/{id}', 'update');
+        Route::get('products/delete/{id}', 'destroy');
+        Route::get('product-image/delete/{id}', 'destroyImage');
+    });
 });
 
 //User routes
@@ -73,5 +87,6 @@ Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index']);
     //Edit profile routes
     Route::get('orders');
-    Route::get('{user_id}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
+    Route::get('{user_name}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
 });
+Route::get('/cart', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->middleware(['auth']);

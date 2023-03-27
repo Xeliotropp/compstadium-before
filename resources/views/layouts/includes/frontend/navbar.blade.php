@@ -11,7 +11,7 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="/" class="active">Начало</a></li>
-                        <li class="scroll-to-section"><a href="">За нас</a></li>
+                        <li class="scroll-to-section"><a href="/about">За нас</a></li>
                         <li class="scroll-to-section"><a href="/home">Продукти</a></li>
                         <li class="scroll-to-section"><a href="/#services">Услуги</a></li>
                         <li class="scroll-to-section"><a href="/cart">Количка</a></li>

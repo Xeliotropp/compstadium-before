@@ -36,15 +36,6 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image">Снимка</label>
-                            <input type="file" name="image" class="form-control">
-                            <img src="{{ asset('storage/uploads/category/'.$category->image) }}" width="60px"
-                                height="60px">
-                            @error('image')
-                            <small class="text-danger">{{$message}}</small>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <label for="status">Статус</label>
                             <input type="checkbox" name="status" {{$category->status == '1' ? 'checked':''}}>
                             @error('status')

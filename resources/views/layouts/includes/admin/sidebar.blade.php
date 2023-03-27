@@ -1,9 +1,9 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="/admin/dashboard">
         <i class="mdi mdi-home menu-icon"></i>
-        <span class="menu-title">Табло</span>
+        <span class="menu-title">{{__('Табло')}}</span>
       </a>
     </li>
     <li class="nav-item">
@@ -48,18 +48,11 @@
       </a>
       <div class="collapse" id="ui-basic-products">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="#">Добави продукт</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/admin/category">Разгледай продукти</a>
+          <li class="nav-item"> <a class="nav-link" href="/admin/products/create">Добави продукт</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/admin/products">Разгледай продукти</a>
           </li>
         </ul>
       </div>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="mdi mdi-cog-box menu-icon"></i>
-        <span class="menu-title">Настройки на сайта</span>
-      </a>
     </li>
   </ul>
 </nav>

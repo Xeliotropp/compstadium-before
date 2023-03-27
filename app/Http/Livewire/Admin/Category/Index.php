@@ -18,20 +18,21 @@ class Index extends Component
 
     public function deleteCategory($category_id)
     {
-        dd($category_id);
         $this->category_id = $category_id;
+        logger('Category ID: ' . $this->category_id);
     }
     public function destroyCategory()
     {
         $category = Category::find($this->category_id);
-        $path = '/storage/uploads/category' . $category->image;
-        if (File::exists($path)) {
-            File::delete($path);
+        if (!$category) {
+            session()->flash('error', 'Категорията не може да бъде намерена!');
+            return;
         }
         $category->delete();
         session()->flash('message', 'Успешно изтрита категория!');
         $this->dispatchBrowserEvent('close-modal');
     }
+
 
     public function render()
     {

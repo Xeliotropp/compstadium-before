@@ -38,14 +38,6 @@ class CategoryController extends Controller
             $validatedData['name']
         );
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $path = $file->storeAs('storage/uploads/category', $filename);
-            $category->image = $path;
-        }
-
         $category->status = $request->status == true ? '1' : '0';
         $category->save();
 
@@ -68,15 +60,6 @@ class CategoryController extends Controller
         $category->meta_description = $validatedData['meta_description'];
 
         $category->slug = SlugService::createSlug(Category::class, 'slug', $validatedData['name']);
-
-        if ($request->hasFile('image')) {
-            $path = 'storage/uploads/category' . $category->image;
-            if (File::exists($path)) {
-                File::delete($path);
-            }
-            $fileName = time() . '.' . $request->image->extension();;
-            $request->image->move(public_path('storage/uploads/category'), $fileName);
-        }
 
         $category->status = $request->status == true ? '1' : '0';
         $category->save();

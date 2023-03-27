@@ -11,8 +11,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $name, $slug, $status;
-    public $brand_id;
+    public $name, $slug, $status, $brand_id, $category_id;
     public function rules()
     {
         return [
@@ -21,6 +20,9 @@ class Index extends Component
             'status' => 'nullable'
         ];
     }
+    public $listeners = [
+        'deleteBrand' => 'destroyBrand',
+    ];
     public function resetInput()
     {
         $this->name = '';
@@ -39,19 +41,52 @@ class Index extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
     }
-    public function deleteBrand($id)
+    public function closeModal()
     {
-        $this->brand_id = $id;
-        $this->dispatchBrowserEvent('show-delete-modal');
+        $this->resetInput();
+    }
+
+    public function openModal()
+    {
+        $this->resetInput();
+    }
+
+    public function editBrand(int $brand_id)
+    {
+        $this->brand_id = $brand_id;
+        $brand = Brand::findOrFail($brand_id);
+        $this->name = $brand->name;
+        $this->slug = $brand->slug;
+        $this->status = $brand->status;
+        $this->category_id = $brand->category_id;
+    }
+
+    public function updateBrand()
+    {
+        $validatedData = $this->validate();
+        Brand::find($this->brand_id)->update([
+            'name' => $this->name,
+            'slug' => Str::slug($this->slug),
+            'status' => $this->status == true ? '1' : '0',
+            'category_id' => $this->category_id
+        ]);
+        session()->flash('message', 'Brand Updated Successfully!');
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInput();
+    }
+    public function deleteBrand($brand_id)
+    {
+        $this->brand_id = $brand_id;
     }
 
     public function destroyBrand()
     {
-        $brand = Brand::findOrFail($this->brand_id);
-        $brand->delete();
-        session()->flash('message', 'Успешно изтрита марка!');
+        Brand::findOrFail($this->brand_id)->delete();
+        session()->flash('message', 'Успешно изтрита марка');
         $this->dispatchBrowserEvent('close-delete-modal');
+        $this->resetInput();
     }
+
     public function render()
     {
         $brands = Brand::orderBy('id', 'DESC')->paginate(10);

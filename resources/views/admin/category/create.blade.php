@@ -31,10 +31,6 @@
                             <textarea name="description" class="form-control"></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image">Снимка</label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <label for="status">Статус</label>
                             <input type="checkbox" name="status">
                         </div>

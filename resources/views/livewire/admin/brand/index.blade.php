@@ -1,23 +1,35 @@
 @extends('layouts.admin')
 @section('content')
 <div>
-    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal"
+    <div wire:ignore.self class="modal fade" id="deleteBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModal">Изтрий категория</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Brand</h5>
+                    <button type="button" class="btn-close" wire:click="closeModal" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent='destroyBrand'>
-                    <div class="modal-body">
-                        <h6>Сигурни ли сте, че искате да изтриете информацията?</h6>
+
+                <div wire:loading class="p-2" style="text-align:center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
-                        <button type="submit" class="btn btn-danger">Да. Изтрий</button>
-                    </div>
-                </form>
+                </div>
+
+                <div wire:loading.remove>
+                    <form wire:submit.prevent="destroyBrand">
+                        <div class="modal-body">
+                            <h4>Are you sure you want to delete this data?</h4>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" wire:click="closeModal" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Yes, Delete!</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -26,7 +38,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Списък с марки</h4>
-                    <a href="/admin/brands/create" class="btn btn-primary float-end">Добави
+                    <a href="{{url('/admin/brands/create')}}" class="btn btn-primary float-end">Добави
                         марки</a>
                 </div>
                 <div class="card-body">
@@ -49,10 +61,9 @@
                                 <td>{{$brand->status == '1' ? 'скрит':'видим'}}</td>
                                 <td>
                                     <a href="{{ route('admin.brands.edit', ['brand_id' => $brand->id]) }}"
-                                        class="btn btn-sm btn-success">Редактиране</a>
-                                    <button data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        wire:click="$emit('deleteBrand', {{ $brand->id }})"
-                                        class="btn btn-danger">Изтрий</button>
+                                        class="btn btn-success">Редактиране</a>
+                                    <a href="#" wire:click="deleteBrand({{ $brand->id }})" data-bs-toggle="modal"
+                                        data-bs-target="#deleteBrandModal" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                             @empty
@@ -68,15 +79,9 @@
 </div>
 @push('script')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Livewire.on('open-delete-modal', function() {
-            $('#deleteModal').modal('show');
+    window.addEventListener('close-modal', event=>{
+            $('#deleteBrandModal').modal('hide');
         });
-
-        Livewire.on('close-delete-modal', function() {
-            $('#deleteModal').modal('hide');
-        });
-    });
 </script>
 @endpush
 @endsection
