@@ -2,27 +2,24 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
     use HasFactory;
-    use Sluggable;
 
     protected $table = 'brands';
+
     protected $fillable = [
         'name',
         'slug',
-        'status'
+        'status',
+        'category_id'
     ];
-    public function sluggable(): array
+
+    public function category()
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

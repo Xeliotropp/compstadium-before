@@ -2,32 +2,64 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12 grid-margin">
-        <div class="d-flex justify-content-between flex-wrap">
-            <div class="d-flex align-items-end flex-wrap">
-                <div class="me-md-3 me-xl-5">
-                    @if (session('message'))
-                    <h2>{{session('message')}}</h2>
-                    @endif
-                    <p class="mb-md-0">Your analytics dashboard template.</p>
-                </div>
-                <div class="d-flex">
-                    <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                    <p class="text-primary mb-0 hover-cursor">Analytics</p>
-                </div>
+    <div class="col-md-12">
+        @if (session('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+        @endif
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    Списък с поръчки
+                </h4>
             </div>
-            <div class="d-flex justify-content-between align-items-end flex-wrap">
-                <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block ">
-                    <i class="mdi mdi-download text-muted"></i>
-                </button>
-                <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-clock-outline text-muted"></i>
-                </button>
-                <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                </button>
-                <button class="btn btn-primary mt-2 mt-xl-0">Generate report</button>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Потребител</th>
+                            <th>Номер за проследяване</th>
+                            <th>Име</th>
+                            <th>Email</th>
+                            <th>Телефон</th>
+                            <th>Пощенски код</th>
+                            <th>Адрес</th>
+                            <th>Статус</th>
+                            <th>Начин на плащане</th>
+                            <th>ID на плащането</th>
+                            <th>Дата на създаване</th>
+                            <th>Дата на актуализация</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($orders as $order)
+                        <tr>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->user_id }}</td>
+                            <td>{{ $order->tracking_no }}</td>
+                            <td>{{ $order->fullname }}</td>
+                            <td>{{ $order->email }}</td>
+                            <td>{{ $order->phone }}</td>
+                            <td>{{ $order->pincode }}</td>
+                            <td>{{ $order->address }}</td>
+                            <td>{{ $order->status_message }}</td>
+                            <td>{{ $order->payment_mode }}</td>
+                            <td>{{ $order->payment_id }}</td>
+                            <td>{{ $order->created_at }}</td>
+                            <td>{{ $order->updated_at }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="14">Няма намерени поръчки</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                <div>
+                    {{ $orders->links() }}
+                </div>
+                <div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,38 +1,120 @@
 <?php
 
-use App\Http\Controllers\Admin\BrandController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Admin\CategoryController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\UserEditController;
-use App\Http\Controllers\Frontend\UserDashboardController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\AboutUsController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Livewire\Admin\Brand\Index as BrandIndex;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/error', [\App\Http\Controllers\ErrorHandlerController::class, 'error404'])->name('error');
+/*
+|--------------------------------------------------------------------------
+| Frontend Routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/collections', 'categories');
+    Route::get('/collections/{category_slug}', 'products');
+    Route::get('/collections/{category_slug}/{product_slug}', 'productView');
+    Route::get('/search', 'productSearch');
+});
 
-// Email verification
+Route::middleware(['auth'])->group(function () {
+
+    Route::controller(CartController::class)->group(function () {
+        Route::get('cart', 'index');
+    });
+
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('checkout', 'index');
+    });
+    Route::controller(WishlistController::class)->group(function () {
+        Route::get('wishlist', 'index');
+    });
+});
+Route::prefix('profile')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', [UserDashboardController::class, 'index']);
+    //Edit profile routes
+    Route::get('orders');
+    Route::get('{user_name}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
+});
+
+Route::get('/about', [AboutUsController::class, 'index']);
+Route::get('/thank-you', [FrontendController::class, 'thankyou']);
+
+
+/*
+|--------------------------------------------------------------------------
+| Backend Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
+
+    // Dashboard Route
+    Route::get('dashboard', [DashboardController::class, 'index']);
+
+    // Category Routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('category', 'index');
+        Route::get('category/create', 'create');
+        Route::post('category', 'store');
+        Route::get('category/{category}/edit/', 'edit');
+        Route::put('category/{category}', 'update');
+        Route::get('category/delete/{id}', 'destroy');
+    });
+
+    // Product Routes
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('product', 'index');
+        Route::get('product/create', 'create');
+        Route::post('product', 'store');
+        Route::get('product/edit/{id}', 'edit');
+        Route::put('product/{id}', 'update');
+        Route::get('product/delete/{id}', 'destroy');
+        Route::get('product-image/delete/{id}', 'destroyImage');
+    });
+
+    // Slider Routes
+    Route::controller(SliderController::class)->group(function () {
+        Route::get('slider', 'index');
+        Route::get('slider/create', 'create');
+        Route::post('slider', 'store');
+        Route::get('slider/edit/{id}', 'edit');
+        Route::put('slider/{id}', 'update');
+        Route::get('slider/delete/{id}', 'destroy');
+    });
+
+    /*
+|--------------------------------------------------------------------------
+| Livewire Routes
+|--------------------------------------------------------------------------
+*/
+    // Brand Route
+    Route::get('brands', BrandIndex::class);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Authentication routes
+|-------------------------------------------------------------------------- 
+*/
 Route::get('/email/verify', function () {
-    return view('auth.verify');
+    return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -40,70 +122,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-//Resending the email verification
+/*
+|--------------------------------------------------------------------------
+| Resending Authentication Email
+|--------------------------------------------------------------------------
+ */
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message', 'Verification link sent!');
+    return back()->with('message', 'Изпратен е линк за потвърждение!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-//Admin routes
-Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
-
-    //Category routes
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/category', 'index');
-        Route::get('/category/create', 'index');
-        Route::post('/category', 'store');
-        Route::put('/category/{category}', 'update');
-    });
-    //Category create routes
-    Route::get('category', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    Route::get('category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
-    Route::post('category', [\App\Http\Controllers\Admin\CategoryController::class, 'store']);
-    //Category update routes
-    Route::get('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.category.edit');
-    Route::put('/category/{category_id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'update']);
-
-    //Edit user routes
-    Route::controller(UserEditController::class)->group(function () {
-        Route::get('/users', 'index');
-        //Route::put('/users/{user}', 'update');
-    });
-    Route::get('/users', [\App\Http\Controllers\Admin\UserEditController::class, 'index']);
-    Route::get('/users/{user_id}/edit', [\App\Http\Controllers\Admin\UserEditController::class, 'edit'])->name('admin.users.edit');
-
-    //Brands routes
-    Route::controller(BrandController::class)->group(function () {
-        Route::get('/brands', 'index');
-        Route::get('/brands/create', 'index');
-        Route::post('/brands', 'store');
-        Route::put('/brands/{brand}', 'update');
-    });
-    Route::get('/brands', [App\Http\Livewire\Admin\Brand\Index::class, 'render']);
-    Route::get('brands/create', [\App\Http\Controllers\Admin\BrandController::class, 'create']);
-    Route::get('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'edit'])->name('admin.brands.edit');
-    Route::put('/brands/{brand_id}/edit', [\App\Http\Controllers\Admin\BrandController::class, 'update']);
-    Route::post('brands', [\App\Http\Controllers\Admin\BrandController::class, 'store']);
-
-    //Product routes
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('products', 'index');
-        Route::get('products/create', 'create');
-        Route::post('products', 'store');
-        Route::get('products/edit/{id}', 'edit');
-        Route::put('products/{id}', 'update');
-        Route::get('products/delete/{id}', 'destroy');
-        Route::get('product-image/delete/{id}', 'destroyImage');
-    });
-});
-
-//User routes
-Route::prefix('profile')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [UserDashboardController::class, 'index']);
-    //Edit profile routes
-    Route::get('orders');
-    Route::get('{user_name}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
-});
-Route::get('/cart', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->middleware(['auth']);

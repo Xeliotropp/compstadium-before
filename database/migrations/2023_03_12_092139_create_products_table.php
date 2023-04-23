@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
 
             $table->integer('original_price');
-            $table->integer('sale_price');
+            $table->integer('selling_price')->nullable();
             $table->integer('quantity');
             $table->tinyInteger('trending')->default('0')->comment('0 = популярно;1=непопулярно');
             $table->tinyInteger('status')->default('0')->comment('0 = видим;1=скрит');

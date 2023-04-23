@@ -3,14 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Dimensions;
 
 class ProductFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -18,18 +19,18 @@ class ProductFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'category_id' => [
                 'required',
-                'integer',
+                'integer'
             ],
             'name' => [
                 'required',
-                'string',
+                'string'
             ],
             'slug' => [
                 'required',
@@ -38,28 +39,27 @@ class ProductFormRequest extends FormRequest
             ],
             'brand' => [
                 'required',
-                'string',
-                'max:255',
+                'string'
             ],
             'small_description' => [
                 'required',
-                'string',
+                'string'
             ],
             'description' => [
                 'required',
-                'string',
+                'string'
             ],
             'original_price' => [
                 'required',
-                'integer',
+                'integer'
             ],
             'selling_price' => [
-                'required',
-                'integer',
+                'nullable',
+                'integer'
             ],
             'quantity' => [
                 'required',
-                'integer',
+                'integer'
             ],
             'trending' => [
                 'nullable'
@@ -74,17 +74,15 @@ class ProductFormRequest extends FormRequest
             ],
             'meta_keyword' => [
                 'required',
-                'string',
+                'string'
             ],
             'meta_description' => [
                 'required',
-                'string',
+                'string'
             ],
             'image' => [
-                'image',
-                'mimes:jpeg,png,jpg,gif,svg',
-                'max:2048',
-            ],
+                'nullable'
+            ]
         ];
     }
 }

@@ -23024,7 +23024,7 @@ dl li {
 }
 
 .auth .register-half-bg {
-    background: url("../images/auth/register-2.jpg");
+    background: url("../images/auth/register-bg.jpg");
     background-size: cover;
 }
 
@@ -23185,7 +23185,7 @@ dl li {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     padding: 0;
-    width: 257px;
+    width: 267px;
     z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;

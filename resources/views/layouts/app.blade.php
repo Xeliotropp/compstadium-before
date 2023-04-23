@@ -8,16 +8,26 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> @yield('title') </title>
+
+    <meta name="description" content="@yield('meta_description')">
+    <meta name="keywords" content="@yield('meta_keyword')">
+    <meta name="author" content="Supty">
+
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    @livewireStyles
+    <!-- Styles -->
+    <link href="{{ asset('assets\css\bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets\css\style.css') }}" rel="stylesheet">
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -45,32 +55,55 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     <!-- responsive -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/responsive.css')}}">
-    @livewireScripts
+
+    <link rel="stylesheet" href="{{asset('admin/vendors/mdi/css/materialdesignicons.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/vendors/base/vendor.bundle.base.css')}}" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{asset('admin/css/style.css')}}" />
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{{asset('admin/images/favicon.png')}}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/solid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/light.css') }}">
+
+    <style>
+        .custom-class {
+            padding-top: 100px;
+        }
+    </style>
+
+    @livewireStyles
 </head>
 
 <body>
-
     <div id="app">
-        <div class="container-scroller">
-            @include('layouts.includes.frontend.navbar')
-        </div>
 
-        <main class="py-4">
-            @yield('content')
+        @include('layouts.inc.frontend.navbar')
+
+        <main class="custom-class">
+            <div class="v-100 mt-5">
+                @yield('content')
+            </div>
         </main>
-        <div class="container-scroller">
-            @include('layouts.includes.frontend.footer')
-        </div>
     </div>
-
     <!-- Scripts -->
-    <script src="frontend/vendor/jquery/jquery.min.js"></script>
-    <script src="frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="frontend/assets/js/owl-carousel.js"></script>
-    <script src="frontend/assets/js/animation.js"></script>
-    <script src="frontend/assets/js/imagesloaded.js"></script>
-    <script src="frontend/assets/js/popup.js"></script>
-    <script src="frontend/assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- Scripts -->
+    <script src="{{asset('frontend/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/animation.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/imagesloaded.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/popup.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/custom.js')}}"></script>
 
     <script src="{{asset('frontend/assets/js/jquery-1.11.3.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/jquery-1.11.3.min.js')}}"></script>
@@ -92,6 +125,27 @@
     <script src="{{asset('frontend/assets/js/sticker.js')}}"></script>
     <!-- main js -->
     <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+    <script>
+        window.addEventListener('message', event => {
+            if(event.detail){
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.notify(event.detail.text, event.detail.type);
+            }
+        });
+    </script>
+
+    <script src="{{asset('admin/vendors/base/vendor.bundle.base.js')}}"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="{{asset('admin/js/off-canvas.js')}}"></script>
+    <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
+    <script src="{{asset('admin/js/template.js')}}"></script>
+    <!-- endinject -->
+
+    @include('layouts.inc.frontend.footer')
+    @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

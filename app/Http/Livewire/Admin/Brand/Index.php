@@ -3,32 +3,47 @@
 namespace App\Http\Livewire\Admin\Brand;
 
 use App\Models\Brand;
+use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
+
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
     public $name, $slug, $status, $brand_id, $category_id;
+
+    public function render()
+    {
+        $categories = Category::where('status', '0')->get();
+        $brands = Brand::orderBy('id', 'DESC')->paginate(10);
+        return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories])
+            ->extends('layouts.admin')
+            ->section('content');
+    }
+
     public function rules()
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|unique:brands',
+            'category_id' => 'required|integer',
+            'slug' => 'required|string',
             'status' => 'nullable'
         ];
     }
-    public $listeners = [
-        'deleteBrand' => 'destroyBrand',
-    ];
+
     public function resetInput()
     {
-        $this->name = '';
-        $this->slug = '';
-        $this->status = '';
+        $this->name = NULL;
+        $this->slug = NULL;
+        $this->status = NULL;
+        $this->brand_id = NULL;
+        $this->category_id = NULL;
     }
+
     public function storeBrand()
     {
         $validatedData = $this->validate();
@@ -36,11 +51,13 @@ class Index extends Component
             'name' => $this->name,
             'slug' => Str::slug($this->slug),
             'status' => $this->status == true ? '1' : '0',
+            'category_id' => $this->category_id
         ]);
-        session()->flash('message', 'Успешно добавяне на марка!');
+        session()->flash('message', 'Успешно добавена марка!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
     }
+
     public function closeModal()
     {
         $this->resetInput();
@@ -70,10 +87,11 @@ class Index extends Component
             'status' => $this->status == true ? '1' : '0',
             'category_id' => $this->category_id
         ]);
-        session()->flash('message', 'Brand Updated Successfully!');
+        session()->flash('message', 'Успешно обновена марка!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
     }
+
     public function deleteBrand($brand_id)
     {
         $this->brand_id = $brand_id;
@@ -82,14 +100,8 @@ class Index extends Component
     public function destroyBrand()
     {
         Brand::findOrFail($this->brand_id)->delete();
-        session()->flash('message', 'Успешно изтрита марка');
-        $this->dispatchBrowserEvent('close-delete-modal');
+        session()->flash('message', 'Успешно изтрита марка!');
+        $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
-    }
-
-    public function render()
-    {
-        $brands = Brand::orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.admin.brand.index', ['brands' => $brands]);
     }
 }

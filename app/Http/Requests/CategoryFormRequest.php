@@ -8,8 +8,10 @@ class CategoryFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -17,9 +19,9 @@ class CategoryFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'name' => [
@@ -31,9 +33,12 @@ class CategoryFormRequest extends FormRequest
                 'string'
             ],
             'description' => [
-                'required',
+                'required'
             ],
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
+            'image' => [
+                'nullable',
+                'mimes:png,jpeg,jpg'
+            ],
             'meta_title' => [
                 'required',
                 'string'
@@ -43,8 +48,8 @@ class CategoryFormRequest extends FormRequest
                 'string'
             ],
             'meta_description' => [
-                'required',
-            ],
+                'required'
+            ]
         ];
     }
 }
