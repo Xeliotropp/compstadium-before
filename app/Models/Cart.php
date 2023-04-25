@@ -34,5 +34,4 @@ class Cart extends Model
     {
         return $this->belongsTo(ProductColor::class, 'product_color_id', 'id');
     }
-
 }
