@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Order;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 

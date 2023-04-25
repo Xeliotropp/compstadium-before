@@ -27,10 +27,12 @@
                         </li>
                         @endguest
                         @auth
-                        <li class="scroll-to-section">
-                            <a class="scroll-to-section" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" v-pre>
-                                <i class="fa fa-user-alt">{{ Auth::user()->name }}</i>
+                        <li>
+                            <a href="#" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false" v-pre>
+                                <div>
+                                    <i class="fa fa-user-alt"></i>
+                                    <label>{{ Auth::user()->name }}</label>
+                                </div>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

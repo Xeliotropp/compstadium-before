@@ -78,8 +78,8 @@
                                             <button wire:loading.attr="disabled" class="nav-link fw-bold"
                                                 id="onlinePayment-tab" data-bs-toggle="pill"
                                                 data-bs-target="#onlinePayment" type="button" role="tab"
-                                                aria-controls="onlinePayment" aria-selected="false">Плащане чрез
-                                                PayPal</button>
+                                                aria-controls="onlinePayment" aria-selected="false">Онлайн
+                                                плащане</button>
                                         </div>
                                         <div class="tab-content col-md-9" id="v-pills-tabContent">
                                             <div class="tab-pane active show fade" id="cashOnDeliveryTab"
@@ -99,7 +99,6 @@
                                             </div>
                                             <div class="tab-pane fade" id="onlinePayment" role="tabpanel"
                                                 aria-labelledby="onlinePayment-tab" tabindex="0">
-                                                <h6>Плащане чрез PayPal</h6>
                                                 <hr />
                                                 <div wire:ignore>
                                                     <div id="paypal-button-container">

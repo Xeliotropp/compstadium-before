@@ -3,7 +3,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ url('admin/dashboard') }}">
         <i class="mdi mdi-home menu-icon"></i>
-        <span class="menu-title">Админски панел</span>
+        <span class="menu-title">Начало</span>
       </a>
     </li>
     <li class="nav-item">
