@@ -7,7 +7,6 @@
         <div class="col-md-8">
             <div class="card">
                 <h2 class="card-header">{{ __('Табло') }}</h2>
-
                 <div class="card-body" style="line-height: 10px;">
                     <span><span style="font-weight: bold;">Потребител:</span> {{ Auth::user()->name }}</span>
                     <div class="card-body text-center">
