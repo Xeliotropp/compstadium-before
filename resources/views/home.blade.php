@@ -22,6 +22,7 @@
                                         @endphp
                                         @if ($order)
                                         <div>
+                                            <p>test</p>
                                             <div>
                                                 <p style="font-size: 20px;">Номер на поръчката: {{ $order->tracking_no
                                                     }}
