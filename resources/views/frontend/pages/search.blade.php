@@ -44,8 +44,12 @@
                         </a>
                     </h5>
                     <div>
-                        <span class="selling-price">{{ $productItem->selling_price }}лв.</span>
-                        <span class="original-price">{{ $productItem->original_price }}лв.</span>
+                        @if ($productItem->selling_price == null)
+                        <span class="selling-price">{{ $productItem->original_price*1.79 }}лв.</span>
+                        @else
+                        <span class="selling-price">{{ $productItem->selling_price*1.79 }}лв.</span>
+                        <span class="original-price">{{ $productItem->original_price*1.79 }}лв.</span>
+                        @endif
                     </div>
                 </div>
             </div>
