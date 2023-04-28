@@ -92,7 +92,7 @@
                                         памет</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{url('/collections/hard-drivers')}}">Твърди
+                                    <a class="nav-link text-light" href="{{url('/collections/hard-drives')}}">Твърди
                                         дискове</a>
                                 </li>
                                 <li class="nav-item">

@@ -45,12 +45,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('wishlist', 'index');
     });
 });
-Route::prefix('profile')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [UserDashboardController::class, 'index']);
-    //Edit profile routes
-    Route::get('orders');
-    Route::get('{user_name}/edit', [App\Http\Controllers\Frontend\UserDashboardController::class, 'edit'])->name('frontend.user.edit');
-});
 
 Route::get('/about', [AboutUsController::class, 'index']);
 Route::get('/thank-you', [FrontendController::class, 'thankyou']);
