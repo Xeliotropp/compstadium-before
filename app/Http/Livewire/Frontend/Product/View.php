@@ -32,7 +32,7 @@ class View extends Component
 
                 session()->flash('message', 'Продуктът вече е в списъка със желания!');
                 $this->dispatchBrowserEvent('message', [
-                    'text' => 'Already added to wishlist!',
+                    'text' => 'Продуктът вече е в списъка със желания!',
                     'type' => 'warning',
                     'status' => 409
                 ]);
@@ -46,7 +46,7 @@ class View extends Component
                 $this->emit('wishlistAddedUpdated');
                 session()->flash('message', 'Успешно добавен продукт към списъка със желания.');
                 $this->dispatchBrowserEvent('message', [
-                    'text' => 'Added to wishlist successfully.',
+                    'text' => 'Успешно добавен продукт към списъка със желания.',
                     'type' => 'success',
                     'status' => 200
                 ]);
